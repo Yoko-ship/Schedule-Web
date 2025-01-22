@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+    <div class="card-body">
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Подтвердить</button>
+        </form>
+    </div>
+    {% else %}
+    <a href="{% url 'login' %}">Войти</a>
+    {% endif%}
+{% endblock %}

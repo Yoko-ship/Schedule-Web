@@ -1,0 +1,143 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+
+<div class="schedule">
+    <table>
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>День недели</th>
+                <th>Предмет</th>
+                <th>Комната</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Понедельник" %}
+            <tr class="понедельник">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+
+            <tr>
+                {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Вторник" %}
+            <tr class="вторник">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+
+            <tr>
+                {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Среда" %}
+            <tr class="среда">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+
+            <tr>
+                {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Четверг" %}
+            <tr class="четверг">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+
+            <tr class="пятница">
+                {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Пятница" %}
+            <tr class="пятница">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+            
+            <tr class="суббота">
+                {% for schedule in context %}
+            {% if schedule.get_day_of_week_display == "Суббота" %}
+            <tr class="суббота">
+                <td>{{schedule.time}}</td>
+                <td>{{schedule.get_day_of_week_display}}</td>
+                <td>{{schedule.subject}}</td>
+                <td>{{schedule.classroom}}</td>
+                <td>
+                    <form method="post" action="{% url 'delete' schedule.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete-btn"></button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+            {%else%}
+            <p></p>
+            {%endif%}
+            {%endfor%}
+        </tbody>
+    </table>
+</div>    
+{%endblock%}

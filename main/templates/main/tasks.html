@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <div class="form-div">
+        <form method="post" action="{% url  'task' %}" class="form">
+            {% csrf_token %}
+            {{form.as_p}}
+            <div>
+                <button>Добавить</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="search-field">
+        <input type="search" class="search-task" placeholder="Поиск">
+    </div>
+
+    <div class="grids" id="grids">
+        {% for info in information %}
+        <div class="grid" id="grid">
+            <p class="subject-search">Предмет: {{info.subject }}</p>
+            <span>Задача: {{info.task }}</span>
+            <p>Срок: {{info.deadline }}</p>
+
+            <form method="post" action="{% url 'dell_task' info.id %}">
+                {% csrf_token %}
+                <button class="delete-btn"></button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}

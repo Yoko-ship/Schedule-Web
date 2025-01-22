@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{%block content %}
+    <form method="post" action="{% url 'add_notes' %}" class="form-note">
+        {% csrf_token %}
+        {{ note.as_p }}
+        <div>
+            <button type="submit">Добавить</button>    
+        </div>
+    </form>
+
+<div class="search-field">
+    <input type="search" placeholder="Поиск" class="search-input">
+</div>
+
+
+<div class="grids">
+    {% for info in information %}
+        <div class="grid">
+            <p>Время: {{info.pub_date}}</p>
+            <span class="search-span">{{info.content }}</span>
+
+            <form method="post" action="{% url 'del_notes' info.id %}">
+                {% csrf_token %}
+                <button class="delete-btn"></button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+    
+{%endblock %}
