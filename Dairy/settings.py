@@ -93,7 +93,8 @@ DATABASES = {
         'USER': os.environ["user"],
         'PASSWORD': os.environ["password"],
         "HOST": os.environ["host"],
-        "PORT":os.environ["port"]
+        "PORT":os.environ["port"],
+        'CONN_MAX_AGE':500
     }
 }
 
