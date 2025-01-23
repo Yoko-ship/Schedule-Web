@@ -1,7 +1,10 @@
 Веб дневник на Django, есть функция добавить расписания,заметки,задачи.
 ## Ссылка
 ``` https://schedule-web.onrender.com/ ```
-
+## Установка:
+клонируем проект с помощью ``` clone git https://github.com/Yoko-ship/Schedule-Web.git ```,устанавливаем зависимости.
+## Важно: 
+Нужно поменять настройки базы данных,для этого перейдите в Dairy - settings.py - DATABASES
 
 ## Для установки зависимостей,выполните команду
 ``` pip install -r requirements.txt ```
