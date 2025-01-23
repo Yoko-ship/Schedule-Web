@@ -15,7 +15,7 @@ class Schedule(models.Model):
     subject = models.CharField(max_length=50,verbose_name="Названия предмета")
     classroom = models.IntegerField(verbose_name="Номер комнаты")
     day_of_week = models.CharField(max_length=3,choices=DAYS_OF_WEEK,verbose_name="День недели")
-    time = models.TimeField(verbose_name="Начало занятии")
+    time = models.CharField(verbose_name="Начало занятии")
     
     def __str__(self):
         return f"{self.subject} ({self.day_of_week} - {self.time})"
