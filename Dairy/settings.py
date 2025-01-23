@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'main'
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'Dairy.urls'
 
@@ -129,8 +132,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
+STATIC_URL = '/static/'  # Базовый URL для статических файлов
+
+# Директория, куда будут собираться статические файлы
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Если у вас есть дополнительные локальные статические файлы:
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Здесь указываете локальную папку static
+]
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = '/'
 
