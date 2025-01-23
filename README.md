@@ -2,7 +2,7 @@
 ## Ссылка
 ``` https://schedule-web.onrender.com/ ```
 ## Установка:
-клонируем проект с помощью ``` clone git https://github.com/Yoko-ship/Schedule-Web.git ```,устанавливаем зависимости.
+клонируем проект с помощью ``` git clone https://github.com/Yoko-ship/Schedule-Web.git ```,устанавливаем зависимости.
 ## Важно: 
 Нужно поменять настройки базы данных,для этого перейдите в Dairy - settings.py - DATABASES
 
