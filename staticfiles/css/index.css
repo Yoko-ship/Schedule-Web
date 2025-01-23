@@ -1,0 +1,60 @@
+
+.schedule{
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+}
+table{
+    width: 100%;
+}
+
+.schedule th{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+.schedule td{
+    padding: 8px 10px;
+    border: 1px solid #ddd ;
+}
+.schedule table{
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.schedule td:first-child {
+    font-weight: bold;
+    color: #333;
+}
+
+.schedule tr:nth-child(even) {
+    background-color: #f9f9f9; 
+}
+  .schedule tr:hover {
+    background-color: #f1f1f1; 
+}
+
+.schedule tr.понедельник {
+    background-color: #e6ffe6;
+}
+.schedule tr.вторник {
+    background-color: #e6f7ff;
+}
+.schedule tr.среда {
+    background-color: #b388b0;
+}
+.schedule tr.четверг {
+    background-color: #7a72c5;
+}
+
+.schedule tr.пятница {
+    background-color: #2abbce;
+}
+
+.schedule tr.суббота {
+    background-color: #d8d8d8;
+}
+  
