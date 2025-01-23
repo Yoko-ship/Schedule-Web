@@ -27,8 +27,13 @@ SECRET_KEY = 'django-insecure-yq+85%q!icu%q=i4q8^t#j*7^j5&n4kegdqo_gl=^-3dq1^^d5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost',"schedule-web.onrender.com"]
+ALLOWED_HOSTS = ['schedule-web.onrender.com', '127.0.0.1', 'localhost']
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://schedule-web.onrender.com',
+]
 
 # Application definition
 
