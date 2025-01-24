@@ -2,7 +2,7 @@
 {%block content %}
 
     <div class="form-div">
-        <form method="post" action="{% url 'add_notes' %}" class="form-note form">
+        <form method="post" action="{% url 'add_notes' %}" class="form">
             {% csrf_token %}
             {{ note.as_p }}
             <div>
