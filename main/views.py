@@ -1,12 +1,9 @@
 from django.shortcuts import render,get_object_or_404,redirect
-from .models import Schedule,Note,Task
+from .models import Schedule,Note,Task,Subject
 from .form import FeedbackModel,NoteForm,TaskForm,SignUpForm,LoginForm
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
-from django.views.generic import DetailView,CreateView
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.contrib.auth.models import User
 
 @login_required
@@ -65,7 +62,6 @@ def add_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            print("Somewthing")
             form.save(user=request.user)
             return redirect("/task")
         

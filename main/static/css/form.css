@@ -52,3 +52,9 @@
     font-weight: bold;
     padding: 8px;
 }
+
+#id_new_subject_helptext{
+    font-size: 18px;
+    text-align: center;
+    color: blue;
+}

@@ -1,19 +1,52 @@
 from django import forms
-from .models import Schedule,Note,Task
+from .models import Schedule,Note,Task,Subject
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 
 class FeedbackModel(forms.ModelForm):
+    new_subject = forms.CharField(
+        max_length=200,
+        required=False,
+        label="Добавить новый предмет",
+        help_text="Если предмет отсутствует в списке , добавьте его здесь"
+    )
+
+    subject = forms.ModelChoiceField(
+        queryset=Subject.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={"class":"form-control"}),
+        label="Предмет"
+    )
+
     class Meta:
         model = Schedule
-        fields = ["subject","day_of_week","time","classroom"]
+        fields = ["subject","new_subject","day_of_week","time","classroom"]
         labels = {
-            "subject":"Предмет",
             "day_of_week":"День недели",
             "time":"Начало пары",
             "classroom": "Комната" 
         }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        subject = cleaned_data.get("subject")
+        new_subject = cleaned_data.get("new_subject")
+
+        if not subject and not new_subject:
+            raise forms.ValidationError("Вы должны выбрать существующий предмет или добавить новый")
+        
+        if not subject and new_subject:
+            cleaned_data["subject"] = Subject.objects.create(name=new_subject)
+    
+        return cleaned_data
+
+    
     def save(self,commit=True,user=None):
+        new_subject = self.cleaned_data.get("new_subject")
+        if new_subject:
+            subject,created = Subject.objects.get_or_create(name=new_subject)
+            self.instance.subject = subject
+
         instance = super().save(commit=False)
         if user:
             instance.user = user
@@ -41,15 +74,46 @@ class NoteForm(forms.ModelForm):
         return instance
 
 class TaskForm(forms.ModelForm):
+    new_subject = forms.CharField(
+        max_length=200,
+        required=False,
+        label="Добавить новый предмет",
+        help_text="Если предмет отсутствует в списке,добавьте его здесь"
+    )
+
+    subject = forms.ModelChoiceField(
+        queryset=Subject.objects.all(),
+        required=False,
+        widget=forms.Select(attrs={'class':"form-control"}),
+        label="Предмет"
+    )
+
     class Meta:
         model = Task
-        fields = ["subject","task","deadline"]
+        fields = ["task","deadline","subject","new_subject"]
+        
         labels = {
-            "subject":"Предмет",
             "task":"Задания",
             "deadline":"Срок"
             }
+        
+
+    def clean(self):
+        cleaned_data = super().clean()
+        subject = cleaned_data.get("subject")
+        new_subject = cleaned_data.get("new_subject")
+
+        if not subject and not new_subject:
+            raise forms.ValidationError("Вы должны выбрать существующий предмет либо добавить новый")
+        
+        return cleaned_data
+
     def save(self,commit=True,user=None):
+        new_subject = self.cleaned_data.get("new_subject")
+        if new_subject:
+            subject,created = Subject.objects.get_or_create(name=new_subject)
+            self.instance.subject = subject
+
         instance = super().save(commit=False)
         if user:
             instance.user = user
