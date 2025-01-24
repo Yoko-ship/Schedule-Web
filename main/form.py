@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule,Note,Task,Subject
+from .models import Schedule,Note,Task,Subject,Tag
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -57,14 +57,41 @@ class FeedbackModel(forms.ModelForm):
     
 
 class NoteForm(forms.ModelForm):
+    new_tag = forms.CharField(
+        max_length=50,
+        required=False,
+        label="Добавить новый тэг",
+        help_text="Если тэг отсутсвует в списке , добавьте его здесь"
+    )
+
+    tag = forms.ModelChoiceField(
+        queryset=Tag.objects.all(),
+        required=False,
+        label="Тэг"
+    )
     class Meta:
         model = Note
-        fields = ["content"]
+        fields = ["content","tag"]
         labels = {
             "content": "Заметка"
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        tag = cleaned_data.get("tag")
+        new_tag = cleaned_data.get("new_tag")
+
+        if not tag and not new_tag:
+            raise forms.ValidationError("Вы должный выбрать существующий тэг или добавить новый")
+        
+        return cleaned_data
+    
     def save(self,commit=True,user=None):
+        new_tag = self.cleaned_data.get("new_tag")
+        if new_tag:
+            tag,created = Tag.objects.get_or_create(name=new_tag)
+            self.instance.tag = tag
+            
         instance = super().save(commit=False)
         if user:
             instance.user = user

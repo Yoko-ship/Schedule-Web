@@ -1,16 +1,9 @@
 {% extends "main/base.html" %}
 {% block content %}
 
-{% if form.errors %}
-    <p style="color: red; text-align:center">Пароль или почта не совпадает</p>
-    
-{%endif%}
 
 {% if user.is_authenticated %}
-      <p style="color: red; text-align:center">У вас недостаточно прав</p>
-    {% else %}
-      <p style="color: red; text-align:center">Пожалуста войдите в аккаунт.</p>
-
+      <p style="color: red; text-align:center">У вас недостаточно прав</p>  
   {% endif %}
 
 

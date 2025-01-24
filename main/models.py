@@ -7,6 +7,12 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=150)
+
+    def __str__(self):
+        return self.name
+
 class Schedule(models.Model):
     DAYS_OF_WEEK = [
         ("MON","Понедельник"),
@@ -31,6 +37,7 @@ class Note(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     content = models.CharField()
     pub_date = models.DateTimeField()
+    tag = models.ForeignKey(Tag,on_delete=models.CASCADE)
 
 
 class Task(models.Model):

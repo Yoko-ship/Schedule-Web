@@ -1,15 +1,19 @@
 {% extends 'main/base.html' %}
 {%block content %}
-    <form method="post" action="{% url 'add_notes' %}" class="form-note">
-        {% csrf_token %}
-        {{ note.as_p }}
-        <div>
-            <button type="submit">Добавить</button>    
-        </div>
-    </form>
+
+    <div class="form-div">
+        <form method="post" action="{% url 'add_notes' %}" class="form-note form">
+            {% csrf_token %}
+            {{ note.as_p }}
+            <div>
+                <button type="submit">Добавить</button>    
+            </div>
+        </form>
+    </div>
+    
 
 <div class="search-field">
-    <input type="search" placeholder="Поиск" class="search-input">
+    <input type="search" placeholder="Поиск по тэгу" class="search-input">
 </div>
 
 
@@ -17,7 +21,8 @@
     {% for info in information %}
         <div class="grid">
             <p>Время: {{info.pub_date}}</p>
-            <span class="search-span">{{info.content }}</span>
+            <span >Заметка: {{info.content }}</span>
+            <p class="search-span">Тэг: {{info.tag}}</p>
 
             <form method="post" action="{% url 'del_notes' info.id %}">
                 {% csrf_token %}

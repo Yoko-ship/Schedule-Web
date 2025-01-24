@@ -58,3 +58,19 @@
     text-align: center;
     color: blue;
 }
+
+.helptext{
+    color: rgb(126, 126, 4);
+    font-size: 18px;
+}
+.form li{
+    list-style: none;
+    font-size: 18px;
+    padding: 10px;
+    color: rgb(126, 126, 4);
+}
+.errorlist li{
+    list-style: none;
+    color: red;
+    font-size: 18px;
+}
