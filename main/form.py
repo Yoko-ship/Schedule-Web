@@ -1,7 +1,7 @@
 from django import forms
-from .models import Schedule,Note,Task,Subject,Tag
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
-from django.contrib.auth.models import User
+from .models import Schedule,Note,Task,Subject,Tag,MyUser
+from django.contrib.auth.forms import UserCreationForm
+
 
 class FeedbackModel(forms.ModelForm):
     new_subject = forms.CharField(
@@ -150,15 +150,24 @@ class TaskForm(forms.ModelForm):
         return instance
 
 class SignUpForm(UserCreationForm):
+    email_address = forms.EmailField(label="Почта",max_length=50,required=True,widget=forms.EmailInput)
+    username = forms.CharField(label="Имя пользователя",max_length=50,required=True)
     class Meta:
-        model = User
-        fields = ("username","password1","password2")
-        labels = {
-            "username":"Имя",
-            "password1":"Пароль",
-            "password2":"Подтверждение пароля"
-        }
+        model = MyUser
+        fields = ["username","email_address","password1","password2"]
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(label="Имя пользователя")
-    password = forms.CharField(label="Пароль",widget=forms.PasswordInput)
+
+
+class UserForm(forms.Form):
+    username = forms.CharField(label="Имя пользователя",max_length=50,required=True)
+    email_address = forms.EmailField(label="Почта",max_length=50,required=True,widget=forms.EmailInput)
+    password = forms.CharField(label="Пароль",max_length=50,required=True,widget=forms.PasswordInput)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email_address = cleaned_data.get("email_address")
+        password = cleaned_data.get("password")
+        if not email_address and not password:
+            raise forms.ValidationError("Вы должны заполнить все поля")
+        
+        return cleaned_data

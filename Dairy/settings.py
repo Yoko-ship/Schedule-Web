@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["secret_key"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['schedule-web.onrender.com', '127.0.0.1', 'localhost']
 
@@ -145,7 +145,9 @@ STATICFILES_DIRS = [
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = '/'
 
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+AUTH_USER_MODEL = "main.MyUser"

@@ -1,10 +1,9 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Schedule,Note,Task,Subject
-from .form import FeedbackModel,NoteForm,TaskForm,SignUpForm,LoginForm
+from .form import FeedbackModel,NoteForm,TaskForm,SignUpForm,UserForm
 from django.utils import timezone
 from django.contrib.auth import login,authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 @login_required
 def main_menu(request):
@@ -90,12 +89,12 @@ def register(request):
     return render(request,"main/register.html",{"form":form})
 
 def login_view(request):
-    form = LoginForm(data=request.POST or None)
+    form = UserForm(data=request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password"]
-            user = authenticate(username=username,password=password)
+            email_address = form.cleaned_data.get("email_address")
+            password = form.cleaned_data.get("password")
+            user = authenticate(email_address=email_address,password=password)
             if user is not None:
                 login(request,user)
                 return redirect("/")

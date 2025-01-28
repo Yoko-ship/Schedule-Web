@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Schedule,Note,Task,Subject,Tag
+from .models import Schedule,Note,Task,Subject,Tag,MyUser
 class AdminCustom(admin.ModelAdmin):
     # fieldsets = [
     #     ("Занятия",{"fields": ["lesson"]}),
@@ -22,3 +22,4 @@ admin.site.register(Note)
 admin.site.register(Task)
 admin.site.register(Subject,TaskAdmin)
 admin.site.register(Tag)
+admin.site.register(MyUser)
