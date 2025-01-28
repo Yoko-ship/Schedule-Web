@@ -1,5 +1,5 @@
 from django import forms
-from .models import Schedule,Note,Task,Subject,Tag,MyUser
+from .models import Schedule,Note,Task,Subject,Tag,MyUser,Profile
 from django.contrib.auth.forms import UserCreationForm
 
 
@@ -171,3 +171,14 @@ class UserForm(forms.Form):
             raise forms.ValidationError("Вы должны заполнить все поля")
         
         return cleaned_data
+    
+class ProfileForm(forms.ModelForm):
+    phone = forms.CharField(label="Телефон номер",max_length=50,required=False)
+    name = forms.CharField(label="Имя",max_length=50,required=False)
+    email = forms.EmailField(label="Почта",max_length=50,required=False)
+    city = forms.CharField(label="Город(не обязательно)",max_length=50,required=False)
+    country = forms.CharField(label="Страна(не обязательно)",max_length=50,required=False)
+
+    class Meta:
+        model = Profile
+        fields = ["phone","name","email","city","country"]

@@ -34,7 +34,7 @@ class Schedule(models.Model):
     ]
     user = models.ForeignKey(MyUser,on_delete=models.CASCADE) #* Привязываем к пользователю
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE,related_name="schedule")
-    classroom = models.IntegerField(verbose_name="Номер комнаты")
+    classroom = models.CharField(verbose_name="Комната")
     day_of_week = models.CharField(max_length=3,choices=DAYS_OF_WEEK,verbose_name="День недели")
     time = models.CharField(verbose_name="Начало занятии")
     
@@ -56,3 +56,10 @@ class Task(models.Model):
     subject = models.ForeignKey(Subject,on_delete=models.CASCADE,related_name="tasks")
 
 
+class Profile(models.Model):
+    phone = models.CharField(max_length=50)
+    user = models.OneToOneField(MyUser,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)

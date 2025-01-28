@@ -3,6 +3,13 @@
 
 <h1 style="text-align: center;">Profile</h1>
 <div class="card-body">
-    <p style="text-align: center; font-size: 18px; padding:10px;">Имя: {{name}}</p>
+    <div class="border">
+        <p>Имя: <span>{{information.name}}</span></p> <br>
+        <p>Почта: <span>{{information.email}}</span></p> <br>
+        <p>Номер: <span>{{information.phone}}</span></p> <br>
+        <p>Город: <span>{{information.city}}</span></p> <br>
+        <p>Страна: <span>{{information.country}}</span></p> <br>
+        <a href="/update_profile">Редактировать</a>
+    </div>
 </div>
 {% endblock %}

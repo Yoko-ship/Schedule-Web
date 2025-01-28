@@ -74,3 +74,33 @@
     color: red;
     font-size: 18px;
 }
+
+.warning{
+    text-align: center;
+
+}
+.warning p{
+    font-size: 16px;
+    color: red;
+}
+.warning div{
+    font-size: 20px;
+    padding: 15px;
+}
+
+.card-body{
+    padding: 10px;
+    text-align: center;
+    border: 1px  solid #ccc;
+    border-radius: 10px;
+    width: 500px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+.card-body a{
+    text-decoration: none;
+}
+
+.card-body span{
+    font-weight: bold;
+}
